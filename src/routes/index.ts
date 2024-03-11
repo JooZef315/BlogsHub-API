@@ -1,11 +1,14 @@
 import express from "express";
-import { userRouter } from "./usersRoute";
+import { authRouter } from "./authRoutes";
+import { usersRouter } from "./usersRoutes";
+import { blogsRouter } from "./blogsRoutes";
 
-export const rootRouter = express.Router()
+export const rootRouter = express.Router();
 
-rootRouter.get('/', (req, res) => {
-    console.log(req.originalUrl)
-    res.send('ok!!')
-})
+rootRouter.get("/", (req, res) => {
+  res.send("OK!");
+});
 
-rootRouter.route('/users').get(userRouter)
+rootRouter.use("/auth", authRouter);
+rootRouter.use("/blogs", blogsRouter);
+rootRouter.use("/users", usersRouter);
