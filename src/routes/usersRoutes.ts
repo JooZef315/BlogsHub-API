@@ -12,7 +12,7 @@ import {
 export const usersRouter = express.Router();
 
 usersRouter
-  .route("/")
+  .route("/hiiiii")
   .get(asyncHandler(getUsersController))
   .post(asyncHandler(createUserController));
 
