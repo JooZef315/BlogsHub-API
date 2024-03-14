@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
-// import Comment from "./commentModel";
-// import User from "./userModel";
 
-const blogSchema = new mongoose.Schema(
+export const blogSchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -23,20 +21,18 @@ const blogSchema = new mongoose.Schema(
     body: {
       type: String,
       required: [true, "please add your blog body"],
-      minlength: [5, "blogs must be at least 50 characters long"],
+      minlength: [50, "blogs must be at least 50 characters long"],
     },
     comments: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Comment",
-        unique: true,
       },
     ],
     likedBy: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        unique: true,
       },
     ],
     blogCoverUrl: String,

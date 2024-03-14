@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const commentSchema = new mongoose.Schema(
+export const commentSchema = new mongoose.Schema(
   {
     body: {
       type: String,
@@ -26,7 +26,6 @@ const commentSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Comment",
-        unique: true,
       },
     ],
   },
@@ -35,4 +34,4 @@ const commentSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("comment", commentSchema);
+export default mongoose.model("Comment", commentSchema);

@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { emailsValidator } from "../utils/emailsValidator";
-const userSchema = new mongoose.Schema(
+
+export const userSchema = new mongoose.Schema(
   {
     username: {
       type: String,
@@ -31,21 +32,18 @@ const userSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Blog",
-        unique: true,
       },
     ],
     followers: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        unique: true,
       },
     ],
     following: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        unique: true,
       },
     ],
     passwordResetToken: String,
