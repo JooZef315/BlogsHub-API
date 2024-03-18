@@ -1,7 +1,16 @@
 import { Request, Response } from "express";
+import { getUser } from "../../services/users/getUser";
 
-export const getUserController = (req: Request, res: Response) => {
-  console.log(req.originalUrl);
-  console.log(req.query);
-  res.send("get User route");
+// @desc    get a user
+// @route   GET /api/v1/users/:id
+// @access  Public
+// @param   {string} id - User ID.
+// @query   {boolean} full - Optional. to fully populate the user.
+export const getUserController = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  //convert to bollean
+  const full = req.query.full === "true";
+
+  const data = await getUser(id, full);
+  res.status(200).json(data);
 };
