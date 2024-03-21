@@ -7,6 +7,7 @@ import {
   followUserController,
   getUserController,
   getUsersController,
+  toggleIsAdminController,
 } from "../controllers";
 
 export const usersRouter = express.Router();
@@ -16,7 +17,6 @@ usersRouter
   .get(asyncHandler(getUsersController))
   .post(asyncHandler(createUserController));
 
-//query to include followers / likes / blogs
 usersRouter
   .route("/:id")
   .get(asyncHandler(getUserController))
@@ -24,4 +24,7 @@ usersRouter
   .delete(asyncHandler(deleteUserController));
 
 //follow / unfollow
-usersRouter.put("/:id/follow", asyncHandler(followUserController));
+usersRouter.post("/:id/follow", asyncHandler(followUserController));
+
+//toggle isAdmin
+usersRouter.put("/:id/admin", asyncHandler(toggleIsAdminController));

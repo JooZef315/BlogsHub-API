@@ -12,5 +12,6 @@ export const getUserController = async (req: Request, res: Response) => {
   const full = req.query.full === "true";
 
   const data = await getUser(id, full);
+
   res.status(200).json(data);
 };

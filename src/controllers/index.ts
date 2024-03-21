@@ -10,6 +10,7 @@ export { getUserController } from "./usersControllers/getUserController";
 export { editUserController } from "./usersControllers/editUserController";
 export { deleteUserController } from "./usersControllers/deleteUserController";
 export { followUserController } from "./usersControllers/followUserController";
+export { toggleIsAdminController } from "./usersControllers/toggleIsAdminController";
 
 export { getBlogsController } from "./blogsControllers/getBlogsController";
 export { getFollowedBlogsController } from "./blogsControllers/getFollowedBlogsController";

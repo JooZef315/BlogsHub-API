@@ -3,6 +3,10 @@ import { validateUser } from "../../validators/userValidator";
 import { CustomError } from "../../utils/customErrors";
 import { createUser } from "../../services/users/createUser";
 
+/* 
+TODO: upload profilePic
+*/
+
 // @desc    signup
 // @route   POST /api/v1/users/
 // @access  Public

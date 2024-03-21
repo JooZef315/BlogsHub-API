@@ -9,11 +9,17 @@ export const getUser = async (id: String, full: Boolean) => {
 
   if (full) {
     const user = await User.findById(id)
-      .select(["username", "email", "isAdmin"])
+      .select(["username", "email"])
       .populate(["likes", "followers", "following"]);
     return user ? user : {};
   } else {
-    const user = await User.findById(id);
+    const user = await User.findById(id).select([
+      "username",
+      "email",
+      "likes",
+      "followers",
+      "following",
+    ]);
     return user ? user : {};
   }
 };

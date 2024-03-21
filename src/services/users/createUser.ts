@@ -7,6 +7,7 @@ export const createUser = async (userData: TUser) => {
   const existedUser = await User.findOne({
     $or: [{ username: userData.username }, { email: userData.email }],
   });
+
   if (existedUser) {
     throw new CustomError("user already exists!", 400);
   }
@@ -14,6 +15,7 @@ export const createUser = async (userData: TUser) => {
   const profilePicUrl = userData.profilePicUrl
     ? userData.profilePicUrl
     : "assets/profilePic.png";
+
   const newUser = await User.create({
     username: userData.username,
     email: userData.email,
@@ -21,5 +23,6 @@ export const createUser = async (userData: TUser) => {
     isAdmin: false,
     profilePicUrl: profilePicUrl,
   });
+
   return newUser;
 };

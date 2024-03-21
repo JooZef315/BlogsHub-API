@@ -1,7 +1,17 @@
 import { Request, Response } from "express";
+import { toggleFollow } from "../../services/users/toggleFollow";
 
-export const followUserController = (req: Request, res: Response) => {
-  console.log(req.originalUrl);
-  console.log(req.query);
-  res.send("follow User route");
+// @desc    follow/unfollow a user
+// @route   POST /api/v1/users/:id/follow
+// @access  Private
+// @param   {string} id - User ID.
+export const followUserController = async (req: Request, res: Response) => {
+  const paramId = req.params.id;
+  const currentUserId = req.body.currentUserId;
+
+  await toggleFollow(paramId, currentUserId);
+
+  res.status(200).json({
+    message: `user's following list was updated successfully`,
+  });
 };
