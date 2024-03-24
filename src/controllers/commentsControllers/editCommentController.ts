@@ -1,7 +1,18 @@
 import { Request, Response } from "express";
+import { editComment } from "../../services/comments/editComment";
 
-export const editCommentController = (req: Request, res: Response) => {
-  console.log(req.originalUrl);
-  console.log(req.query);
-  res.send("edit Comment route");
+// @desc    updata a comment
+// @route   PUT /api/v1/blogs/:bid/comments/:cid
+// @access  Private
+// @param   {string} bid - blog ID.
+// @param   {string} cid - comment ID.
+export const editCommentController = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const newCommentBody: string = req.body.body;
+
+  const updatedComment = await editComment(id, newCommentBody);
+
+  res.status(200).json({
+    message: `comment ${updatedComment._id} was updated successfully`,
+  });
 };

@@ -10,6 +10,7 @@ import {
   getFollowedBlogsController,
   getCommentController,
   getCommentsController,
+  editCommentController,
   addCommentController,
   deleteCommentController,
 } from "../controllers";
@@ -39,5 +40,5 @@ blogsRouter
 blogsRouter
   .route("/:id/comments/:id")
   .get(asyncHandler(getCommentController))
-  .put(asyncHandler(editBlogController))
+  .put(asyncHandler(editCommentController))
   .delete(asyncHandler(deleteCommentController));

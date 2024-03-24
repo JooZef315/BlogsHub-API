@@ -53,3 +53,10 @@ export const blogZodSchema = z
       path: ["tags"],
     }
   );
+
+export const commentZodSchema = z.object({
+  body: z.string().trim().min(1, { message: "comment body is required" }),
+  userId: z.string().min(1, { message: "userId is required" }),
+  blogId: z.string().min(1, { message: "blogId is required" }),
+  parentId: z.string().optional(),
+});
