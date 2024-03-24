@@ -15,10 +15,10 @@ export { toggleIsAdminController } from "./usersControllers/toggleIsAdminControl
 export { getBlogsController } from "./blogsControllers/getBlogsController";
 export { getFollowedBlogsController } from "./blogsControllers/getFollowedBlogsController";
 export { getBlogController } from "./blogsControllers/getBlogController";
-export { addBlogController } from "./blogsControllers/addBlogController";
+export { createBlogController } from "./blogsControllers/createBlogController";
 export { editBlogController } from "./blogsControllers/editBlogController";
 export { deleteBlogController } from "./blogsControllers/deleteBlogController";
-export { addLikeController } from "./blogsControllers/addLikeController";
+export { likesController } from "./blogsControllers/likesController";
 
 export { getCommentsController } from "./commentsControllers/getCommentsController";
 export { getCommentController } from "./commentsControllers/getCommentController";

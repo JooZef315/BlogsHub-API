@@ -1,7 +1,13 @@
 import { Request, Response } from "express";
+import { getBlog } from "../../services/blogs/getBlog";
 
-export const getBlogController = (req: Request, res: Response) => {
-  console.log(req.originalUrl);
-  console.log(req.query);
-  res.send("blog get route");
+// @desc    get a blog
+// @route   GET /api/v1/blogs/:id
+// @access  Public
+// @param   {string} id - Blog ID.
+export const getBlogController = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const blog = await getBlog(id);
+
+  res.status(200).json(blog);
 };

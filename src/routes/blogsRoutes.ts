@@ -3,10 +3,10 @@ import asyncHandler from "express-async-handler";
 import {
   getBlogsController,
   getBlogController,
-  addBlogController,
+  createBlogController,
   editBlogController,
   deleteBlogController,
-  addLikeController,
+  likesController,
   getFollowedBlogsController,
   getCommentController,
   getCommentsController,
@@ -19,7 +19,7 @@ export const blogsRouter = express.Router();
 blogsRouter
   .route("/")
   .get(asyncHandler(getBlogsController))
-  .post(asyncHandler(addBlogController));
+  .post(asyncHandler(createBlogController));
 
 blogsRouter.get("/followed-blogs", asyncHandler(getFollowedBlogsController));
 
@@ -29,7 +29,7 @@ blogsRouter
   .put(asyncHandler(editBlogController))
   .delete(asyncHandler(deleteBlogController));
 
-blogsRouter.post("/:id/like", asyncHandler(addLikeController));
+blogsRouter.post("/:id/like", asyncHandler(likesController));
 
 blogsRouter
   .route("/:id/comments")

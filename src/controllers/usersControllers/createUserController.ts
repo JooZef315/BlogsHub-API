@@ -12,10 +12,13 @@ TODO: upload profilePic
 // @access  Public
 export const createUserController = async (req: Request, res: Response) => {
   const { userData, error } = validateUser(req.body);
+
   if (error) {
     throw new CustomError(error.message, 400);
   }
+
   const newUser = await createUser(userData);
+
   res.status(200).json({
     message: `new user ${newUser.username} was created successfully, please login`,
   });

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { string } from "zod";
 
 export const blogSchema = new mongoose.Schema(
   {
@@ -17,11 +18,12 @@ export const blogSchema = new mongoose.Schema(
       type: String,
       trim: true,
       maxlength: [50, "slug must be at most 50 characters long"],
+      default: "Blog description",
     },
     body: {
       type: String,
       required: [true, "please add your blog body"],
-      minlength: [50, "blogs must be at least 50 characters long"],
+      minlength: [10, "blogs must be at least 50 characters long"],
     },
     comments: [
       {
@@ -35,7 +37,10 @@ export const blogSchema = new mongoose.Schema(
         ref: "User",
       },
     ],
-    blogCoverUrl: String,
+    blogCoverUrl: {
+      type: String,
+      default: "assets/blogCoverUrl.jpg",
+    },
     tags: [String],
   },
   {

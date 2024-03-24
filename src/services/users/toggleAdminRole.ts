@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import User from "../../models/userModel";
 import { CustomError } from "../../utils/customErrors";
 
-export const toggleAdminRole = async (id: String) => {
+export const toggleAdminRole = async (id: string) => {
   if (!mongoose.isValidObjectId(id)) {
     throw new CustomError("not a valid Id", 400);
   }
@@ -14,5 +14,5 @@ export const toggleAdminRole = async (id: String) => {
   }
 
   user.isAdmin = !user.isAdmin;
-  user.save();
+  await user.save();
 };

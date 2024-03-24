@@ -4,7 +4,7 @@ import User from "../../models/userModel";
 import { CustomError } from "../../utils/customErrors";
 import { TUser } from "../../validators/zodTypes";
 
-export const editUser = async (id: String, userData: TUser) => {
+export const editUser = async (id: string, userData: TUser) => {
   if (!mongoose.isValidObjectId(id)) {
     throw new CustomError("not a valid Id", 400);
   }
@@ -20,11 +20,9 @@ export const editUser = async (id: String, userData: TUser) => {
   user.username = userData.username;
   user.email = userData.email;
   user.password = newHashedPassword;
-  user.profilePicUrl = userData.profilePicUrl
-    ? userData.profilePicUrl
-    : user.profilePicUrl;
+  user.profilePicUrl = userData.profilePicUrl || user.profilePicUrl;
 
-  const updatedUser = user.save();
+  const updatedUser = await user.save();
 
   return updatedUser;
 };

@@ -2,24 +2,28 @@ import mongoose from "mongoose";
 import User from "../../models/userModel";
 import { CustomError } from "../../utils/customErrors";
 
-export const getUser = async (id: String, full: Boolean) => {
+export const getUser = async (id: string, full: boolean) => {
   if (!mongoose.isValidObjectId(id)) {
     throw new CustomError("not a valid id", 400);
   }
 
+  let query = User.findById(id);
+
   if (full) {
-    const user = await User.findById(id)
+    query = query
       .select(["username", "email"])
       .populate(["likes", "followers", "following"]);
-    return user ? user : {};
   } else {
-    const user = await User.findById(id).select([
+    query = query.select([
       "username",
       "email",
       "likes",
       "followers",
       "following",
     ]);
-    return user ? user : {};
   }
+
+  const user = await query.exec();
+
+  return user ? user : {};
 };

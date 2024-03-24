@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import User from "../../models/userModel";
 import { CustomError } from "../../utils/customErrors";
 
-export const toggleFollow = async (paramId: String, currentUserId: String) => {
+export const toggleFollow = async (paramId: string, currentUserId: string) => {
   if (
     !mongoose.isValidObjectId(paramId) ||
     !mongoose.isValidObjectId(currentUserId)
@@ -28,18 +28,18 @@ export const toggleFollow = async (paramId: String, currentUserId: String) => {
       (id) => !id.equals(user._id)
     );
     currentUser.following = [...currentUserFollowList];
-    currentUser.save();
+    await currentUser.save();
 
     const userFollowList = user.followers.filter(
       (id) => !id.equals(currentUser._id)
     );
     user.followers = [...userFollowList];
-    user.save();
+    await user.save();
   } else {
     currentUser.following.push(user._id);
-    currentUser.save();
+    await currentUser.save();
 
     user.followers.push(currentUser._id);
-    user.save();
+    await user.save();
   }
 };
