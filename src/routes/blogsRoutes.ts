@@ -33,12 +33,12 @@ blogsRouter
 blogsRouter.post("/:id/like", asyncHandler(likesController));
 
 blogsRouter
-  .route("/:id/comments")
+  .route("/:bid/comments")
   .get(asyncHandler(getCommentsController))
   .post(asyncHandler(addCommentController));
 
 blogsRouter
-  .route("/:id/comments/:id")
+  .route("/:bid/comments/:cid")
   .get(asyncHandler(getCommentController))
   .put(asyncHandler(editCommentController))
   .delete(asyncHandler(deleteCommentController));

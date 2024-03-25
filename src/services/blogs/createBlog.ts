@@ -19,14 +19,14 @@ export const createBlog = async (blogData: TBlog) => {
     throw new CustomError("author not found", 400);
   }
 
-  const blogCoverUrl = blogData.blogCoverUrl
-    ? blogData.blogCoverUrl
-    : "assets/blogCoverUrl.jpg";
+  const blogCoverUrl = blogData.blogCoverUrl || "assets/blogCoverUrl.jpg";
+
+  const slug = blogData.slug || "Blog description";
 
   const newBlog = await Blog.create({
     title: blogData.title,
     author: blogData.author,
-    slug: blogData.slug,
+    slug: slug,
     body: blogData.body,
     tags: blogData.tags,
     blogCoverUrl: blogCoverUrl,

@@ -7,7 +7,7 @@ import { editComment } from "../../services/comments/editComment";
 // @param   {string} bid - blog ID.
 // @param   {string} cid - comment ID.
 export const editCommentController = async (req: Request, res: Response) => {
-  const id = req.params.id;
+  const id = req.params.cid;
   const newCommentBody: string = req.body.body;
 
   const updatedComment = await editComment(id, newCommentBody);
