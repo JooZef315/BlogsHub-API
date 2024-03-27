@@ -36,4 +36,4 @@ export type NestedComment = {
   updatedAt: Date;
 };
 
-export type NestedComments = NestedComment[] | [];
+export type Ids = string[] | Ids[];

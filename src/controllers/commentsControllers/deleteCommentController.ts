@@ -1,7 +1,18 @@
 import { Request, Response } from "express";
+import { deleteComment } from "../../services/comments/deleteComment";
 
-export const deleteCommentController = (req: Request, res: Response) => {
-  console.log(req.originalUrl);
-  console.log(req.query);
-  res.send("delete Comment route");
+// @desc    delete a comment
+// @route   DELETE /api/v1/blogs/:bid/comments/:cid
+// @access  Private
+// @param   {string} cid - comment ID.
+// @param   {string} bid - blog ID.
+export const deleteCommentController = async (req: Request, res: Response) => {
+  const cid = req.params.cid;
+  const bid = req.params.bid;
+
+  const deletedComment = await deleteComment(bid, cid);
+
+  res.status(200).json({
+    message: `${deletedComment.deletedCount} comment and its replies were deleted successfully`,
+  });
 };

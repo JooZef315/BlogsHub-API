@@ -9,6 +9,7 @@ import { getComments } from "../../services/comments/getComments";
 export const getCommentsController = async (req: Request, res: Response) => {
   const blogId = req.params.bid;
   const nested = req.query.nested === "true" || false;
+
   const comments = await getComments(blogId, nested);
 
   res.status(200).json(comments);

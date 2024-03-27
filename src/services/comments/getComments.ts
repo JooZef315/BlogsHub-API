@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import Comment from "../../models/commentModel";
 import Blog from "../../models/blogModel";
 import { CustomError } from "../../utils/customErrors";
-import { nestComments } from "./helpers/nestComments";
+import { nestComments } from "./helpers/nesting";
 import { Comments } from "./helpers/commentTypes";
 
 export const getComments = async (blogId: string, nested: boolean) => {
