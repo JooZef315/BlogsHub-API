@@ -25,5 +25,5 @@ export const getUser = async (id: string, full: boolean) => {
 
   const user = await query.exec();
 
-  return user ? user : {};
+  return user;
 };

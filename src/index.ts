@@ -6,6 +6,7 @@ import cors from "cors";
 import { rootRouter } from "./routes";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 import { connectDB } from "./config/Db";
+import { verifyUser } from "./middlewares/authMiddleware";
 
 dotenv.config();
 const PORT = process.env.PORT || 3001;
@@ -21,11 +22,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+app.use(verifyUser);
+
 app.use("/api/v1", rootRouter);
 
 app.all(
   "*",
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (_, res) => {
     res.status(404).json({ message: "404 not found" });
   })
 );

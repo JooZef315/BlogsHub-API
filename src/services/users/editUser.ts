@@ -15,6 +15,14 @@ export const editUser = async (id: string, userData: TUser) => {
     throw new CustomError("user not found", 404);
   }
 
+  const existedUser = await User.find({
+    $or: [{ username: userData.username }, { email: userData.email }],
+  });
+
+  if (existedUser) {
+    throw new CustomError("username OR email already taken", 400);
+  }
+
   const newHashedPassword = await bcrypt.hash(userData.password, 10);
 
   user.username = userData.username;
