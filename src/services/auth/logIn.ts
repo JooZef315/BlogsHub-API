@@ -3,6 +3,11 @@ import bcrypt from "bcryptjs";
 import User from "../../models/userModel";
 import { CustomError } from "../../utils/customErrors";
 
+const ACCESS_TOKEN_SECRET =
+  process.env.ACCESS_TOKEN_SECRET || "ACCESS_TOKEN_SECRET";
+const REFRESH_TOKEN_SECRET =
+  process.env.REFRESH_TOKEN_SECRET || "REFRESH_TOKEN_SECRET";
+
 export const logIn = async (email: string, password: string) => {
   const user = await User.findOne({ email });
 
@@ -22,9 +27,9 @@ export const logIn = async (email: string, password: string) => {
       username: user.username,
       role: user.isAdmin ? "admin" : "user",
     },
-    process.env.ACCESS_TOKEN_SECRET || "ACCESS_TOKEN_SECRET",
+    ACCESS_TOKEN_SECRET,
     {
-      expiresIn: "60m",
+      expiresIn: "30m",
     }
   );
 
@@ -32,9 +37,9 @@ export const logIn = async (email: string, password: string) => {
     {
       id: user._id,
     },
-    process.env.REFRESH_TOKEN_SECRET || "REFRESH_TOKEN_SECRET",
+    REFRESH_TOKEN_SECRET,
     {
-      expiresIn: "1d",
+      expiresIn: "7d",
     }
   );
 

@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import { JwtPayload } from "jsonwebtoken";
-import { CustomError } from "../utils/customErrors";
-import { verifyToken } from "../utils/verifyToken";
-import { getUser } from "../services/users/getUser";
+import { CustomError } from "../../utils/customErrors";
+import { verifyToken } from "../../utils/verifyToken";
+import { getUser } from "../../services/users/getUser";
 
 type DecodedData = JwtPayload & {
   id: string;
@@ -12,19 +12,21 @@ type DecodedData = JwtPayload & {
 
 type authenticatedRequest = Request & DecodedData;
 
-export const verifyUser = async (
+export const verifyAdmin = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const decodedData: DecodedData = verifyToken(
-    req.headers.authorization
-  ) as DecodedData;
+  const decodedData = verifyToken(req.headers.authorization) as DecodedData;
 
-  const user = await getUser(decodedData.id, false);
+  const user = await getUser(decodedData?.id, false);
 
-  if (!user?._id) {
+  if (!user) {
     throw new CustomError("user not found", 404);
+  }
+
+  if (decodedData.role !== "admin") {
+    throw new CustomError("user Unauthorized", 401);
   }
 
   (req as authenticatedRequest).userId = decodedData.id;

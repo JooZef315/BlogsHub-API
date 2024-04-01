@@ -13,8 +13,9 @@ export const addCommentController = async (req: Request, res: Response) => {
   if (error) {
     throw new CustomError(error.message, 400);
   }
+  const bid = req.params.bid;
 
-  const newComment = await addComment(commentData);
+  const newComment = await addComment(bid, commentData);
 
   res.status(200).json(newComment);
 };

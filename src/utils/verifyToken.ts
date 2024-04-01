@@ -1,6 +1,9 @@
 import jwt from "jsonwebtoken";
 import { CustomError } from "./customErrors";
 
+const ACCESS_TOKEN_SECRET =
+  process.env.ACCESS_TOKEN_SECRET || "ACCESS_TOKEN_SECRET";
+
 export const verifyToken = (authHeader: string | undefined) => {
   const token = authHeader?.split(" ")[1] || "";
 
@@ -9,14 +12,9 @@ export const verifyToken = (authHeader: string | undefined) => {
   }
 
   try {
-    const payload = jwt.verify(
-      token,
-      process.env.ACCESS_TOKEN_SECRET || "ACCESS_TOKEN_SECRET"
-    );
-
+    const payload = jwt.verify(token, ACCESS_TOKEN_SECRET);
     return payload;
   } catch (error: any) {
-    console.log(error.message);
     throw new CustomError(error.message, 401);
   }
 };

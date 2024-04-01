@@ -6,7 +6,7 @@ import { getBlog } from "../../services/blogs/getBlog";
 // @access  Public
 // @param   {string} id - Blog ID.
 export const getBlogController = async (req: Request, res: Response) => {
-  const id = req.params.id;
+  const id = req.params.bid;
   const blog = await getBlog(id);
 
   res.status(200).json(blog);

@@ -5,12 +5,17 @@ import User from "../../models/userModel";
 import { CustomError } from "../../utils/customErrors";
 import { TComment } from "../../validators/zodTypes";
 
-export const addComment = async (commentData: TComment) => {
+export const addComment = async (bid: string, commentData: TComment) => {
   if (
     !mongoose.isValidObjectId(commentData.userId) ||
-    !mongoose.isValidObjectId(commentData.blogId)
+    !mongoose.isValidObjectId(commentData.blogId) ||
+    !mongoose.isValidObjectId(bid)
   ) {
     throw new CustomError("not a valid id/ids", 400);
+  }
+
+  if (bid != commentData.blogId) {
+    throw new CustomError("wrong blog id", 400);
   }
 
   const blog = await Blog.findById(commentData.blogId);

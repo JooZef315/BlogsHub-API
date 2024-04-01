@@ -1,6 +1,39 @@
 import { Request, Response } from "express";
+import { emailsValidator } from "../../utils/emailsValidator";
+import { CustomError } from "../../utils/customErrors";
+import { generateToken } from "../../utils/generateToken";
+import { emailInit } from "../../config/email";
+import { addResetToken } from "../../services/auth/addResetToken";
 
-export const forgetPasswordController = (req: Request, res: Response) => {
-  console.log(req.originalUrl);
-  res.send("auth get forget-password route");
+// @desc    to send an email to reset password
+// @route   GET /api/v1/auth/forget-password
+// @access  Public
+
+type MyQueryParams = {
+  email: string;
+};
+
+export const forgetPasswordController = async (
+  req: Request<{}, {}, {}, MyQueryParams>,
+  res: Response
+) => {
+  const email = req.query.email?.toLowerCase().trim();
+  if (!emailsValidator(email) || email.length < 1) {
+    throw new CustomError("email is not valid", 400);
+  }
+
+  const resetPasswordToken = generateToken();
+  const tokenExpiredDate = new Date();
+
+  const xx = await addResetToken(email, resetPasswordToken, tokenExpiredDate);
+  console.log(xx);
+
+  console.log("sending email ... ");
+  const { transporter, options } = emailInit(email, resetPasswordToken);
+  await transporter.sendMail(options);
+  console.log("email sent!!");
+
+  res.status(200).json({
+    message: "a token was sent to your email, please check your email",
+  });
 };

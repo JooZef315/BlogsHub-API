@@ -14,6 +14,7 @@ import {
   addCommentController,
   deleteCommentController,
 } from "../controllers";
+import { verifyOwner } from "../middlewares/authMiddlewares/verifyOwnerMiddleware";
 
 export const blogsRouter = express.Router();
 
@@ -25,12 +26,12 @@ blogsRouter
 blogsRouter.get("/followed-blogs", asyncHandler(getFollowedBlogsController));
 
 blogsRouter
-  .route("/:id")
+  .route("/:bid")
   .get(asyncHandler(getBlogController))
   .put(asyncHandler(editBlogController))
   .delete(asyncHandler(deleteBlogController));
 
-blogsRouter.post("/:id/like", asyncHandler(likesController));
+blogsRouter.post("/:bid/like", asyncHandler(likesController));
 
 blogsRouter
   .route("/:bid/comments")
@@ -39,6 +40,6 @@ blogsRouter
 
 blogsRouter
   .route("/:bid/comments/:cid")
-  .get(asyncHandler(getCommentController))
+  .get(asyncHandler(verifyOwner), asyncHandler(getCommentController))
   .put(asyncHandler(editCommentController))
   .delete(asyncHandler(deleteCommentController));

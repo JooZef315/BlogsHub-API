@@ -12,7 +12,7 @@ TODO: upload blogs cover
 // @access  Private
 // @param   {string} id - blog ID.
 export const editBlogController = async (req: Request, res: Response) => {
-  const id = req.params.id;
+  const id = req.params.bid;
   const { blogData, error } = validateBlog(req.body);
 
   if (error) {

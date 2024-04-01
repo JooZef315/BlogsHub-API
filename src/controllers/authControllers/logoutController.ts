@@ -17,5 +17,5 @@ export const logoutController = (req: Request, res: Response) => {
     sameSite: "none",
   });
 
-  res.status(200).json({ message: "Cookie cleared" });
+  res.status(200).json({ message: "Cookies cleared!!" });
 };

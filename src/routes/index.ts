@@ -1,5 +1,4 @@
 import express from "express";
-import jwt from "jsonwebtoken";
 import { authRouter } from "./authRoutes";
 import { usersRouter } from "./usersRoutes";
 import { blogsRouter } from "./blogsRoutes";

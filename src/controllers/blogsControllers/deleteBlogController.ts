@@ -6,7 +6,7 @@ import { deleteBlog } from "../../services/blogs/deleteBlog";
 // @access  Private
 // @param   {string} id - blog ID.
 export const deleteBlogController = async (req: Request, res: Response) => {
-  const id = req.params.id;
+  const id = req.params.bid;
 
   const deleteddBlog = await deleteBlog(id);
 

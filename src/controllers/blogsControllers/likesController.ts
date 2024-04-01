@@ -6,7 +6,7 @@ import { toggleLike } from "../../services/blogs/toggleLike";
 // @access  Private
 // @param   {string} id - blog ID.
 export const likesController = async (req: Request, res: Response) => {
-  const blogId = req.params.id;
+  const blogId = req.params.bid;
   const currentUserId: string = req.body.currentUserId;
 
   await toggleLike(blogId, currentUserId);

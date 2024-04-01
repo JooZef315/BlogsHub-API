@@ -6,6 +6,11 @@ type RefreshPyload = JwtPayload & {
   id: string;
 };
 
+const ACCESS_TOKEN_SECRET =
+  process.env.ACCESS_TOKEN_SECRET || "ACCESS_TOKEN_SECRET";
+const REFRESH_TOKEN_SECRET =
+  process.env.REFRESH_TOKEN_SECRET || "REFRESH_TOKEN_SECRET";
+
 export const refreshAccessToken = async (refreshToken: string) => {
   console.log(refreshToken);
   if (!refreshToken) {
@@ -14,7 +19,7 @@ export const refreshAccessToken = async (refreshToken: string) => {
   try {
     const payload = jwt.verify(
       refreshToken,
-      process.env.REFRESH_TOKEN_SECRET || "REFRESH_TOKEN_SECRET"
+      REFRESH_TOKEN_SECRET
     ) as RefreshPyload;
 
     const user = await User.findById(payload.id);
@@ -29,7 +34,7 @@ export const refreshAccessToken = async (refreshToken: string) => {
         username: user.username,
         role: user.isAdmin ? "admin" : "user",
       },
-      process.env.ACCESS_TOKEN_SECRET || "ACCESS_TOKEN_SECRET",
+      ACCESS_TOKEN_SECRET,
       {
         expiresIn: "60m",
       }
