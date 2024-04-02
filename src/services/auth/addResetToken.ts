@@ -19,6 +19,4 @@ export const addResetToken = async (
   user.passwordResetExpires = tokenExpiredDate;
 
   await user.save();
-
-  return user;
 };

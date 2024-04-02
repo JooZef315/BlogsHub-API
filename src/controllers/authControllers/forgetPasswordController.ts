@@ -8,6 +8,7 @@ import { addResetToken } from "../../services/auth/addResetToken";
 // @desc    to send an email to reset password
 // @route   GET /api/v1/auth/forget-password
 // @access  Public
+// @param   {string} email - User email.
 
 type MyQueryParams = {
   email: string;
@@ -24,9 +25,9 @@ export const forgetPasswordController = async (
 
   const resetPasswordToken = generateToken();
   const tokenExpiredDate = new Date();
+  tokenExpiredDate.setMinutes(tokenExpiredDate.getMinutes() + 30);
 
-  const xx = await addResetToken(email, resetPasswordToken, tokenExpiredDate);
-  console.log(xx);
+  await addResetToken(email, resetPasswordToken, tokenExpiredDate);
 
   console.log("sending email ... ");
   const { transporter, options } = emailInit(email, resetPasswordToken);

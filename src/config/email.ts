@@ -19,7 +19,7 @@ export const emailInit = (to: string, token: string) => {
     to,
     from: process.env.EMAIL_FROM,
     subject: "Reset your password",
-    html: `<h1>blogsHub</h1><h4>This is an email sent form blogsHub to reset your password.</h4> <p>your reset token is : <b>${token}</b> </p>`,
+    html: `<h1>blogsHub</h1><h4>This is an email sent form blogsHub to reset your password.</h4> <p>your reset token is : <b>${token} </b> <br> it expires in 30mins</p>`,
   };
 
   return { transporter, options };

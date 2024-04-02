@@ -14,21 +14,23 @@ import {
   addCommentController,
   deleteCommentController,
 } from "../controllers";
-import { verifyOwner } from "../middlewares/authMiddlewares/verifyOwnerMiddleware";
+import { initUpload } from "../config/multer";
+
+const uploadCover = initUpload("blogs");
 
 export const blogsRouter = express.Router();
 
 blogsRouter
   .route("/")
   .get(asyncHandler(getBlogsController))
-  .post(asyncHandler(createBlogController));
+  .post(uploadCover.single("cover"), asyncHandler(createBlogController));
 
 blogsRouter.get("/followed-blogs", asyncHandler(getFollowedBlogsController));
 
 blogsRouter
   .route("/:bid")
   .get(asyncHandler(getBlogController))
-  .put(asyncHandler(editBlogController))
+  .put(uploadCover.single("cover"), asyncHandler(editBlogController))
   .delete(asyncHandler(deleteBlogController));
 
 blogsRouter.post("/:bid/like", asyncHandler(likesController));
@@ -40,6 +42,6 @@ blogsRouter
 
 blogsRouter
   .route("/:bid/comments/:cid")
-  .get(asyncHandler(verifyOwner), asyncHandler(getCommentController))
+  .get(asyncHandler(getCommentController))
   .put(asyncHandler(editCommentController))
   .delete(asyncHandler(deleteCommentController));

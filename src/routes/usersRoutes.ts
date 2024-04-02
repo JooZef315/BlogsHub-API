@@ -9,18 +9,21 @@ import {
   getUsersController,
   toggleIsAdminController,
 } from "../controllers";
+import { initUpload } from "../config/multer";
+
+const uploadImage = initUpload("users");
 
 export const usersRouter = express.Router();
 
 usersRouter
   .route("/")
   .get(asyncHandler(getUsersController))
-  .post(asyncHandler(createUserController));
+  .post(uploadImage.single("image"), asyncHandler(createUserController));
 
 usersRouter
   .route("/:id")
   .get(asyncHandler(getUserController))
-  .put(asyncHandler(editUserController))
+  .put(uploadImage.single("image"), asyncHandler(editUserController))
   .delete(asyncHandler(deleteUserController));
 
 //follow / unfollow

@@ -1,10 +1,21 @@
 import { Request, Response } from "express";
+import { CustomError } from "../../utils/customErrors";
+import { resetPassword } from "../../services/auth/resetPassword";
+import { validateresetingPassword } from "../../validators/resetingPasswordValidator";
 
-export const resetPasswordController = (req: Request, res: Response) => {
-  // console.log(resetPasswordToken);
-  // console.log(tokenExpiredDate);
-  // console.log(new Date("2024-03-27T18:36:12.485+00:00"));
-  // console.log(tokenExpiredDate > new Date("2024-03-27T18:36:12.485+00:00"));
-  console.log(req.originalUrl);
-  res.send("auth post reset Password route");
+// @desc    to reset password
+// @route   PUT /api/v1/auth/reset-password
+// @access  Public
+export const resetPasswordController = async (req: Request, res: Response) => {
+  const { resetingPasswordData, error } = validateresetingPassword(req.body);
+
+  if (error) {
+    throw new CustomError(error.message, 400);
+  }
+
+  await resetPassword(resetingPasswordData);
+
+  res.status(200).json({
+    message: "ypur password was reset successfully, please login",
+  });
 };

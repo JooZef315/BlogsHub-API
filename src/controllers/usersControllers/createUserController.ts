@@ -3,10 +3,6 @@ import { validateUser } from "../../validators/userValidator";
 import { CustomError } from "../../utils/customErrors";
 import { createUser } from "../../services/users/createUser";
 
-/* 
-TODO: upload profilePic
-*/
-
 // @desc    signup
 // @route   POST /api/v1/users/
 // @access  Public
@@ -15,6 +11,11 @@ export const createUserController = async (req: Request, res: Response) => {
 
   if (error) {
     throw new CustomError(error.message, 400);
+  }
+
+  if (req.file?.destination && req.file?.filename) {
+    const profilePic = `${req.file?.destination}/${req.file?.filename}`;
+    userData.profilePicUrl = profilePic;
   }
 
   const newUser = await createUser(userData);

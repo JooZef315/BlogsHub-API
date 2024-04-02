@@ -3,10 +3,6 @@ import { validateUser } from "../../validators/userValidator";
 import { CustomError } from "../../utils/customErrors";
 import { editUser } from "../../services/users/editUser";
 
-/* 
-TODO: upload profilePic
-*/
-
 // @desc    updata a user
 // @route   PUT /api/v1/users/:id
 // @access  Private
@@ -17,6 +13,11 @@ export const editUserController = async (req: Request, res: Response) => {
 
   if (error) {
     throw new CustomError(error.message, 400);
+  }
+
+  if (req.file?.destination && req.file?.filename) {
+    const profilePic = `${req.file?.destination}/${req.file?.filename}`;
+    userData.profilePicUrl = profilePic;
   }
 
   const updatedUser = await editUser(id, userData);

@@ -11,14 +11,14 @@ export const userZodSchema = z
     password: z
       .string()
       .min(4, { message: "Password must be at least 4 characters long" }),
-    confirmPasswod: z
+    confirmPasswrod: z
       .string()
       .min(4, { message: "Password must be at least 4 characters long" }),
     profilePicUrl: z.string().optional(),
   })
-  .refine((data) => data.confirmPasswod === data.password, {
+  .refine((data) => data.confirmPasswrod === data.password, {
     message: "Passwords don't match",
-    path: ["confirm"],
+    path: ["confirmPasswrod"],
   });
 
 export const blogZodSchema = z
@@ -60,3 +60,19 @@ export const commentZodSchema = z.object({
   blogId: z.string().min(1, { message: "blogId is required" }),
   parentId: z.string().optional(),
 });
+
+export const resetingPasswordZodSchema = z
+  .object({
+    email: z.string().email("This is not a valid email.").toLowerCase(),
+    newPassword: z
+      .string()
+      .min(4, { message: "Password must be at least 4 characters long" }),
+    confirmNewPassword: z
+      .string()
+      .min(4, { message: "Password must be at least 4 characters long" }),
+    token: z.string(),
+  })
+  .refine((data) => data.confirmNewPassword === data.newPassword, {
+    message: "Passwords don't match",
+    path: ["confirmNewPassword"],
+  });

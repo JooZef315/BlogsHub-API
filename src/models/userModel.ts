@@ -48,7 +48,10 @@ export const userSchema = new mongoose.Schema(
     ],
     passwordResetToken: String,
     passwordResetExpires: Date,
-    profilePicUrl: String,
+    profilePicUrl: {
+      type: String,
+      default: "assets/profilePic.jpg",
+    },
   },
   {
     timestamps: true,

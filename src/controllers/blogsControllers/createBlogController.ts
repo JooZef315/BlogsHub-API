@@ -17,6 +17,11 @@ export const createBlogController = async (req: Request, res: Response) => {
     throw new CustomError(error.message, 400);
   }
 
+  if (req.file?.destination && req.file?.filename) {
+    const coverPic = `${req.file?.destination}/${req.file?.filename}`;
+    blogData.blogCoverUrl = coverPic;
+  }
+
   const newBlog = await createBlog(blogData);
 
   res.status(200).json(newBlog);

@@ -15,8 +15,11 @@ export const editUser = async (id: string, userData: TUser) => {
     throw new CustomError("user not found", 404);
   }
 
-  const existedUser = await User.find({
-    $or: [{ username: userData.username }, { email: userData.email }],
+  const existedUser = await User.findOne({
+    $and: [
+      { $or: [{ username: userData.username }, { email: userData.email }] },
+      { _id: { $ne: user._id } },
+    ],
   });
 
   if (existedUser) {
