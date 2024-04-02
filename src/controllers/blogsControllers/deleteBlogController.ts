@@ -10,6 +10,8 @@ export const deleteBlogController = async (req: Request, res: Response) => {
 
   const deleteddBlog = await deleteBlog(id);
 
+  // deleteFiles(filePath);
+
   res.status(200).json({
     message: `${deleteddBlog.deletedCount} blog was deleted successfully`,
   });
