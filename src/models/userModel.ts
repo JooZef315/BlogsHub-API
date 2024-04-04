@@ -50,7 +50,8 @@ export const userSchema = new mongoose.Schema(
     passwordResetExpires: Date,
     profilePicUrl: {
       type: String,
-      default: "assets/profilePic.jpg",
+      default:
+        "https://ucarecdn.com/bab9f262-fd8b-44b4-b3ef-32781584d69e/profilePic.png",
     },
   },
   {

@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { validateUser } from "../../validators/userValidator";
 import { CustomError } from "../../utils/customErrors";
 import { editUser } from "../../services/users/editUser";
+import { uploadCareClient } from "../../utils/uploadCareClient";
 
 // @desc    updata a user
 // @route   PUT /api/v1/users/:id
@@ -15,8 +16,8 @@ export const editUserController = async (req: Request, res: Response) => {
     throw new CustomError(error.message, 400);
   }
 
-  if (req.file?.destination && req.file?.filename) {
-    const profilePic = `${req.file?.destination}/${req.file?.filename}`;
+  if (req.file) {
+    const profilePic = (await uploadCareClient(req.file.path)) || undefined;
     userData.profilePicUrl = profilePic;
   }
 

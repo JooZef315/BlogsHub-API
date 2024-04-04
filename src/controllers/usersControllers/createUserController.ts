@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { validateUser } from "../../validators/userValidator";
 import { CustomError } from "../../utils/customErrors";
 import { createUser } from "../../services/users/createUser";
+import { uploadCareClient } from "../../utils/uploadCareClient";
 
 // @desc    signup
 // @route   POST /api/v1/users/
@@ -13,8 +14,8 @@ export const createUserController = async (req: Request, res: Response) => {
     throw new CustomError(error.message, 400);
   }
 
-  if (req.file?.destination && req.file?.filename) {
-    const profilePic = `${req.file?.destination}/${req.file?.filename}`;
+  if (req.file) {
+    const profilePic = (await uploadCareClient(req.file.path)) || undefined;
     userData.profilePicUrl = profilePic;
   }
 

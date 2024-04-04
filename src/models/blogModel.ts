@@ -39,7 +39,8 @@ export const blogSchema = new mongoose.Schema(
     ],
     blogCoverUrl: {
       type: String,
-      default: "assets/blogCoverUrl.jpg",
+      default:
+        "https://ucarecdn.com/049b854f-b0e6-4874-820f-c5ef2eb67693/blogCoverUrl.jpg",
     },
     tags: [String],
   },

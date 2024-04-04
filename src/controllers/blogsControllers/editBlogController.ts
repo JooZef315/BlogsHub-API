@@ -2,10 +2,7 @@ import { Request, Response } from "express";
 import { validateBlog } from "../../validators/blogValidator";
 import { CustomError } from "../../utils/customErrors";
 import { editBlog } from "../../services/blogs/editBlog";
-
-/* 
-TODO: upload blogs cover
-*/
+import { uploadCareClient } from "../../utils/uploadCareClient";
 
 // @desc    updata a blog
 // @route   PUT /api/v1/blogs/:id
@@ -19,8 +16,8 @@ export const editBlogController = async (req: Request, res: Response) => {
     throw new CustomError(error.message, 400);
   }
 
-  if (req.file?.destination && req.file?.filename) {
-    const coverPic = `${req.file?.destination}/${req.file?.filename}`;
+  if (req.file) {
+    const coverPic = (await uploadCareClient(req.file.path)) || undefined;
     blogData.blogCoverUrl = coverPic;
   }
 

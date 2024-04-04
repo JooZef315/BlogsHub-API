@@ -2,10 +2,7 @@ import { Request, Response } from "express";
 import { CustomError } from "../../utils/customErrors";
 import { createBlog } from "../../services/blogs/createBlog";
 import { validateBlog } from "../../validators/blogValidator";
-
-/* 
-TODO: upload blogs cover
-*/
+import { uploadCareClient } from "../../utils/uploadCareClient";
 
 // @desc    create new blog
 // @route   POST /api/v1/blogs/
@@ -17,8 +14,8 @@ export const createBlogController = async (req: Request, res: Response) => {
     throw new CustomError(error.message, 400);
   }
 
-  if (req.file?.destination && req.file?.filename) {
-    const coverPic = `${req.file?.destination}/${req.file?.filename}`;
+  if (req.file) {
+    const coverPic = (await uploadCareClient(req.file.path)) || undefined;
     blogData.blogCoverUrl = coverPic;
   }
 
