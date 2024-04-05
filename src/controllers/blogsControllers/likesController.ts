@@ -5,9 +5,16 @@ import { toggleLike } from "../../services/blogs/toggleLike";
 // @route   POST /api/v1/blogs/:id/like
 // @access  Private
 // @param   {string} id - blog ID.
+
+type authenticatedRequest = Request & {
+  userId: string;
+  username: string;
+  userRole: string;
+};
+
 export const likesController = async (req: Request, res: Response) => {
   const blogId = req.params.bid;
-  const currentUserId: string = req.body.currentUserId;
+  const currentUserId: string = (req as authenticatedRequest).userId;
 
   await toggleLike(blogId, currentUserId);
 

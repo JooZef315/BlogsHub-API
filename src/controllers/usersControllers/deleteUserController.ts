@@ -1,10 +1,6 @@
 import { Request, Response } from "express";
 import { deleteUser } from "../../services/users/deleteUser";
 
-/* 
-TODO: use deleteblogs / deletecomments services
-*/
-
 // @desc    delete a user
 // @route   DELETE /api/v1/users/:id
 // @access  Private

@@ -6,17 +6,23 @@ import { getFollowedBlogs } from "../../services/blogs/getFollowedBlogs";
 // @access  Private
 // @query   {number} page - Optional. for pagination.
 
-const BLOGS_PER_PAGE = 2;
+type authenticatedRequest = Request & {
+  userId: string;
+  username: string;
+  userRole: string;
+};
+
+const BLOGS_PER_PAGE = 6;
 
 export const getFollowedBlogsController = async (
-  req: Request<{}, {}, { currentUser: string }, { page: number }>,
+  req: Request,
   res: Response
 ) => {
-  const page = +req.query.page || 1;
-  const currentUser = req.body.currentUser;
+  const page = req.query.page ? +req.query.page : 1;
+  const currentUserId: string = (req as authenticatedRequest).userId;
 
   const followedBlogs = await getFollowedBlogs(
-    currentUser,
+    currentUserId,
     page,
     BLOGS_PER_PAGE
   );

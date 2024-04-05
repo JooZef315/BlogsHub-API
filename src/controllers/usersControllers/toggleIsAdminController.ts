@@ -1,10 +1,6 @@
 import { Request, Response } from "express";
 import { toggleAdminRole } from "../../services/users/toggleAdminRole";
 
-/* 
-TODO: add auth
-*/
-
 // @desc    change user/ admin roles
 // @route   PUT /api/v1/users/:id/admin
 // @access  Private (admins)

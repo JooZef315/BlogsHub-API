@@ -4,15 +4,15 @@ import Blog from "../../models/blogModel";
 import User from "../../models/userModel";
 
 export const getFollowedBlogs = async (
-  currentUser: string,
+  currentUserId: string,
   page: number,
   blogsPerPage: number
 ) => {
-  if (!mongoose.isValidObjectId(currentUser)) {
+  if (!mongoose.isValidObjectId(currentUserId)) {
     throw new CustomError("not a valid Id", 400);
   }
 
-  const user = await User.findById(currentUser);
+  const user = await User.findById(currentUserId);
 
   if (!user) {
     throw new CustomError("user not found", 400);
