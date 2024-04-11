@@ -8,6 +8,7 @@ import {
   forgetPasswordController,
 } from "../controllers";
 import { verifyUser } from "../middlewares/authMiddlewares/verifyUserMiddleware";
+import { limiter } from "../middlewares/rateLimiter";
 
 export const authRouter = express.Router();
 
@@ -19,8 +20,16 @@ authRouter.get(
   asyncHandler(refreshController)
 );
 
-authRouter.get("/forget-password", asyncHandler(forgetPasswordController));
-authRouter.put("/reset-password", asyncHandler(resetPasswordController));
+authRouter.get(
+  "/forget-password",
+  limiter,
+  asyncHandler(forgetPasswordController)
+);
+authRouter.put(
+  "/reset-password",
+  limiter,
+  asyncHandler(resetPasswordController)
+);
 
 authRouter.post(
   "/logout",
