@@ -2,9 +2,9 @@ import { Request, Response } from "express";
 import { toggleLike } from "../../services/blogs/toggleLike";
 
 // @desc    like/unlike a blog
-// @route   POST /api/v1/blogs/:id/like
+// @route   POST /api/v1/blogs/:bid/like
 // @access  Private
-// @param   {string} id - blog ID.
+// @param   {string} bid - blog ID.
 
 type authenticatedRequest = Request & {
   userId: string;

@@ -4,7 +4,7 @@ import { deleteBlog } from "../../services/blogs/deleteBlog";
 // @desc    delete a blog
 // @route   DELETE /api/v1/blogs/:id
 // @access  Private
-// @param   {string} id - blog ID.
+// @param   {string} bid - blog ID.
 export const deleteBlogController = async (req: Request, res: Response) => {
   const id = req.params.bid;
 

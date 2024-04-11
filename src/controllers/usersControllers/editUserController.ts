@@ -4,7 +4,7 @@ import { CustomError } from "../../utils/customErrors";
 import { editUser } from "../../services/users/editUser";
 import { uploadCareClient } from "../../utils/uploadCareClient";
 
-// @desc    updata a user
+// @desc    update a user
 // @route   PUT /api/v1/users/:id
 // @access  Private
 // @param   {string} id - User ID.

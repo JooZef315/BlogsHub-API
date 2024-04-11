@@ -16,6 +16,6 @@ export const resetPasswordController = async (req: Request, res: Response) => {
   await resetPassword(resetingPasswordData);
 
   res.status(200).json({
-    message: "ypur password was reset successfully, please login",
+    message: "your password was reset successfully, please login",
   });
 };

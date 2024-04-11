@@ -8,7 +8,7 @@ import { addResetToken } from "../../services/auth/addResetToken";
 // @desc    to send an email to reset password
 // @route   GET /api/v1/auth/forget-password
 // @access  Public
-// @param   {string} email - User email.
+// @query   {string} email - User email.
 
 type MyQueryParams = {
   email: string;

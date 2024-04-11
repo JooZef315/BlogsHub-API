@@ -4,10 +4,10 @@ import { CustomError } from "../../utils/customErrors";
 import { editBlog } from "../../services/blogs/editBlog";
 import { uploadCareClient } from "../../utils/uploadCareClient";
 
-// @desc    updata a blog
-// @route   PUT /api/v1/blogs/:id
+// @desc    Update a blog
+// @route   PUT /api/v1/blogs/:bid
 // @access  Private
-// @param   {string} id - blog ID.
+// @param   {string} bid - blog ID.
 export const editBlogController = async (req: Request, res: Response) => {
   const id = req.params.bid;
   const { blogData, error } = validateBlog(req.body);
