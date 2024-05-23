@@ -14,7 +14,7 @@ export const createUser = async (userData: TUser) => {
   const hashedPassword = await bcrypt.hash(userData.password, 10);
   const profilePicUrl = userData.profilePicUrl
     ? userData.profilePicUrl
-    : "assets/profilePic.png";
+    : "https://ucarecdn.com/bab9f262-fd8b-44b4-b3ef-32781584d69e/profilePic.png";
 
   const newUser = await User.create({
     username: userData.username,

@@ -19,7 +19,9 @@ export const createBlog = async (blogData: TBlog) => {
     throw new CustomError("author not found", 400);
   }
 
-  const blogCoverUrl = blogData.blogCoverUrl || "assets/blogCoverUrl.jpg";
+  const blogCoverUrl =
+    blogData.blogCoverUrl ||
+    "https://ucarecdn.com/049b854f-b0e6-4874-820f-c5ef2eb67693/blogCoverUrl.jpg";
 
   const slug = blogData.slug || "Blog description";
 
