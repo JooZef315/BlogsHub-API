@@ -1,8 +1,7 @@
 import jwt from "jsonwebtoken";
 import { CustomError } from "./customErrors";
 
-const ACCESS_TOKEN_SECRET =
-  process.env.ACCESS_TOKEN_SECRET || "ACCESS_TOKEN_SECRET";
+const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET!;
 
 export const verifyToken = (authHeader: string | undefined) => {
   const token = authHeader?.split(" ")[1] || "";
