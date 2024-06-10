@@ -28,6 +28,7 @@ This Express API serves as the backend for a blogs application, providing endpoi
 
 ## Technologies Used
 
+- **Docker**
 - **Express.js**
 - **TypeScript**
 - **MongoDB**
@@ -40,26 +41,6 @@ This Express API serves as the backend for a blogs application, providing endpoi
 - **Nodemon**
 - **MailerSend**
 - **Uploadcare**
-
-## Installation
-
-1. Clone the repository:
-
-   ```
-   git clone https://github.com/JooZef315/BlogsHub-API
-   ```
-
-2. Navigate to the project directory:
-
-   ```
-   cd <project-directory>
-   ```
-
-3. Install dependencies:
-
-   ```
-   npm install
-   ```
 
 ## Configuration
 
@@ -82,14 +63,42 @@ EMAIL_FROM =
 UPLOADCARE_SECRET =
 ```
 
-## Usage
+## Installation & Usage
 
-### Development Mode
+1. Clone the repository:
 
-To start the server in development mode with Nodemon, run:
+   ```
+   git clone https://github.com/JooZef315/BlogsHub-API
+   ```
+
+2. Navigate to the project directory:
+
+   ```
+   cd <project-directory>
+   ```
+
+3. Install dependencies:
+
+   ```
+   npm install
+   ```
+
+4. To start the server in development mode with nodemon, run:
+
+   ```
+   npm run dev
+   ```
+
+### Or using Docker
+
+To start the server in development mode with Docker, run:
 
 ```
-npm run dev
+docker build -t blogshub-image .
+```
+
+```
+docker run -d --name blogshub-container -v ${PWD}:/app -p <PORT_NUM>:<PORT_NUM> --env-file .env blogshub-image
 ```
 
 ## API Endpoints

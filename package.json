@@ -4,7 +4,8 @@
   "description": "API for blogs app",
   "main": "src/index.ts",
   "scripts": {
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "dev:docker": "nodemon -L src/index.ts"
   },
   "keywords": [],
   "author": "Mohamed Youssef",
