@@ -14,11 +14,7 @@ export const authRouter = express.Router();
 
 authRouter.post("/login", asyncHandler(loginController));
 
-authRouter.get(
-  "/refresh",
-  asyncHandler(verifyUser),
-  asyncHandler(refreshController)
-);
+authRouter.get("/refresh", asyncHandler(refreshController));
 
 authRouter.get(
   "/forget-password",
