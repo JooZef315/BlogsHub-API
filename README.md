@@ -139,7 +139,7 @@ Detailed documentation for API endpoints can be found in the [API Documentation]
    - **Method**: GET
    - **Route**: /api/v1/auth/refresh
    - **Access**: Private
-   - **Output**: Refresh token
+   - **Output**: Access token
 
 5. **Send an email to reset password**
 
