@@ -6,11 +6,10 @@ type RefreshPyload = JwtPayload & {
   id: string;
 };
 
-const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET!;
-const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET!;
-
 export const refreshAccessToken = async (refreshToken: string) => {
-  console.log(refreshToken);
+  const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET!;
+  const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET!;
+
   if (!refreshToken) {
     throw new CustomError("invalid token", 401);
   }

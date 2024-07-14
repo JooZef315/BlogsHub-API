@@ -3,10 +3,10 @@ import bcrypt from "bcryptjs";
 import User from "../../models/userModel";
 import { CustomError } from "../../utils/customErrors";
 
-const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET!;
-const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET!;
-
 export const logIn = async (email: string, password: string) => {
+  const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET!;
+  const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET!;
+
   const user = await User.findOne({ email });
 
   if (!user) {
